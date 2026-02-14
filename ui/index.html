@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solrock - AI-Powered Pokemon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/rose-pine-dawn.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/shell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/html.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/json.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/yaml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/markdown.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/sql.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/xml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/regex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/java.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+</head>
+<body>
+    <!-- Animated Background Gradient -->
+    <div class="gradient-bg">
+        <div class="gradient-orb gradient-orb-1"></div>
+        <div class="gradient-orb gradient-orb-2"></div>
+        <div class="gradient-orb gradient-orb-3"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="glass-panel header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 8L16 16L8 24" stroke="url(#gradient1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 24H24" stroke="url(#gradient1)" stroke-width="3" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="gradient1" x1="8" y1="8" x2="24" y2="24">
+                                    <stop offset="0%" stop-color="#e8650a"/>
+                                    <stop offset="100%" stop-color="#f59e0b"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Solrock</h1>
+                        <p class="subtitle">AI-Powered Pokemon</p>
+                    </div>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span>Online</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Chat Container -->
+        <main class="chat-container">
+            <div class="messages" id="messages">
+                <!-- Welcome Message -->
+                <div class="message-group ai-message">
+                    <div class="message-avatar ai-avatar">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="message-content glass-panel">
+                        <div class="message-header">
+                            <span class="message-author">Solrock</span>
+                            <span class="message-time">Just now</span>
+                        </div>
+                        <div class="message-text">
+                            <h2>Hi! I'm Solrock</h2>
+                            <p>I'm your AI-powered programming pokemon, built with <strong>LangChain</strong> and powered by <strong>GitHub Models</strong>.</p>
+                            <div class="feature-grid">
+                                <div class="feature-card">
+                                    <div class="feature-icon"><i data-lucide="bar-chart-2"></i></div>
+                                    <div>
+                                        <h4>Code Explanation</h4>
+                                        <p>Get detailed explanations of code snippets</p>
+                                    </div>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon"><i data-lucide="wrench"></i></div>
+                                    <div>
+                                        <h4>Code Improvement</h4>
+                                        <p>Receive actionable suggestions to enhance your code</p>
+                                    </div>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon"><i data-lucide="lightbulb"></i></div>
+                                    <div>
+                                        <h4>Programming Q&A</h4>
+                                        <p>Ask questions and get clear answers</p>
+                                    </div>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon"><i data-lucide="brain"></i></div>
+                                    <div>
+                                        <h4>Context Memory</h4>
+                                        <p>I remember the last 25 messages</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="tip"><strong>Tip:</strong> You can paste code directly or ask programming questions!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator glass-panel" id="typingIndicator" style="display: none;">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        </main>
+
+        <!-- Input Area -->
+        <footer class="input-area glass-panel">
+            <div class="input-container">
+                <button class="action-btn" id="attachBtn" title="Attach file">
+                    <i data-lucide="paperclip"></i>
+                </button>
+                <textarea
+                    id="userInput"
+                    placeholder="Ask a question or paste code here..."
+                    rows="1"
+                ></textarea>
+                <button class="send-btn" id="sendBtn">
+                    <i data-lucide="send"></i>
+                    <span>Send</span>
+                </button>
+            </div>
+            <div class="input-footer">
+                <div class="shortcuts">
+                    <kbd>Shift</kbd> + <kbd>Enter</kbd> for new line &bull; <kbd>Enter</kbd> to send
+                </div>
+                <div class="token-counter">
+                    <span id="tokenCount">0</span> / 2000 tokens
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Quick Actions (floating) -->
+    <div class="quick-actions">
+        <button class="quick-action-btn glass-panel" id="clearBtn" title="Clear chat">
+            <i data-lucide="trash-2"></i>
+        </button>
+        <button class="quick-action-btn glass-panel" id="memoryBtn" title="View memory">
+            <i data-lucide="eye"></i>
+        </button>
+        <button class="quick-action-btn glass-panel" id="statsBtn" title="Statistics">
+            <i data-lucide="bar-chart"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
