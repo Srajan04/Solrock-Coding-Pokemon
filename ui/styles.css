@@ -398,6 +398,13 @@ body {
     width: auto;
 }
 
+/* AI bubbles use block layout so code blocks don't overflow */
+.ai-message .message-content {
+    display: block;
+    max-width: 85%;
+    width: fit-content;
+}
+
 /* User bubbles */
 .user-message .message-content {
     background: rgba(217, 119, 6, 0.08);

@@ -265,46 +265,63 @@ function formatMarkdown(text) {
 
 function formatStructuredResponse(data, type) {
     if (type === 'code_explanation') {
+        const langBadge = `<span style="
+            display: inline-block;
+            background: rgba(232,101,10,0.1);
+            color: var(--color-primary);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        ">${data.language}</span>`;
+
+        const concepts = data.key_concepts.map(c =>
+            `<span style="
+                display: inline-block;
+                background: rgba(232,101,10,0.08);
+                border: 1px solid rgba(232,101,10,0.2);
+                color: var(--color-primary-deep);
+                font-size: 0.75rem;
+                padding: 2px 8px;
+                border-radius: 20px;
+                margin: 2px 3px 2px 0;
+            ">${c}</span>`
+        ).join('');
+
         return `
-            <h3 style="display:flex;align-items:center;gap:6px;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                Code Explanation
-            </h3>
-            <div style="background: rgba(232, 101, 10, 0.1); padding: 0.5rem 0.75rem; border-radius: 6px; margin: 0.5rem 0;">
-                <strong style="color: var(--color-primary);">Language:</strong> ${data.language}
+            <p style="line-height:1.7; margin-bottom: 0.6rem;">${data.detailed_explanation}</p>
+            <div style="display:flex; justify-content:flex-end; align-items:center; gap:0.5rem; margin-top:0.5rem;">
+                ${concepts ? `<div style="flex:1;">${concepts}</div>` : ''}
+                ${langBadge}
             </div>
-            <h4>Summary</h4>
-            <p>${data.summary}</p>
-            <h4>Detailed Explanation</h4>
-            <p>${data.detailed_explanation}</p>
-            <h4>Key Concepts</h4>
-            <ul style="margin-left: 1.2rem;">
-                ${data.key_concepts.map(concept => `<li style="margin-bottom: 0.3rem;">${concept}</li>`).join('')}
-            </ul>
         `;
     } else if (type === 'code_improvement') {
+        const issues = data.original_issues.map(i =>
+            `<li style="margin-bottom:0.3rem;">${i}</li>`
+        ).join('');
+
+        let improvedCode = data.improved_code;
+        let highlightedCode = escapeHtml(improvedCode);
+        try {
+            if (window.hljs) {
+                const result = hljs.highlightAuto(improvedCode.trim());
+                highlightedCode = result.value;
+            }
+        } catch(e) {}
+
         return `
-            <h3 style="display:flex;align-items:center;gap:6px;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-                Code Improvement
-            </h3>
-            <h4>Issues Found</h4>
-            <ul style="margin-left: 1.2rem;">
-                ${data.original_issues.map(issue => `<li style="margin-bottom: 0.3rem; color: var(--color-coral-light);">${issue}</li>`).join('')}
-            </ul>
-            <h4>Suggestions</h4>
-            <ul style="margin-left: 1.2rem;">
-                ${data.suggestions.map(suggestion => `<li style="margin-bottom: 0.3rem; color: var(--color-accent-light);">${suggestion}</li>`).join('')}
-            </ul>
-            <h4>Improved Code</h4>
+            ${issues ? `<p style="margin-bottom:0.4rem; color:rgba(30,41,59,0.65); font-size:0.88rem;">Here's what I found:</p><ul style="margin: 0 0 0.75rem 1.2rem; color: rgba(30,41,59,0.7);">${issues}</ul>` : ''}
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-language">improved</span>
                     <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                 </div>
-                <pre><code>${escapeHtml(data.improved_code)}</code></pre>
+                <pre><code class="hljs">${highlightedCode}</code></pre>
             </div>
-            <p><strong>Explanation:</strong> ${data.explanation}</p>
+            <p style="margin-top:0.6rem; line-height:1.7; color: rgba(30,41,59,0.75); font-size:0.88rem;">${data.explanation}</p>
         `;
     }
     return formatMarkdown(data);
